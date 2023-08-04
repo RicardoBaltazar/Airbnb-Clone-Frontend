@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CreateProductController;
+use App\Http\Controllers\GetProductController;
 use App\Http\Controllers\Users\CreateUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/user', CreateUserController::class);
 Route::post('/login', LoginController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/product', GetProductController::class);
+    Route::post('/product', CreateProductController::class);
 });
